@@ -15,3 +15,23 @@ export const calculator = {
     },
     multiply: (a, b) => a * b,
 }
+
+export function caesarCipher(string, shiftFactor){
+    let result = "";
+    for(let char of string){
+        const isUpper = char === char.toUpperCase() && /[A-Z]/.test(char);
+        const isLower = char === char.toLowerCase() && /[a-z]/.test(char);
+
+        const charCode = char.charCodeAt(0);
+        if(isUpper){
+            const shiftedCode = ((charCode - 65 + shiftFactor) % 26 + 26) % 26 + 65;
+            result += String.fromCharCode(shiftedCode);
+        } else if(isLower){
+            const shiftedCode = ((charCode - 97 + shiftFactor) % 26 + 26) % 26 + 97;
+            result += String.fromCharCode(shiftedCode);
+        } else{
+            result += char;
+        }
+    }
+    return result;
+}
